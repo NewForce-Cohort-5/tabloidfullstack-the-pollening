@@ -27,6 +27,7 @@ export function UserProfileProvider(props) {
       });
   };
 
+  // This logout will clear sessionStorage and "userProfile" will be empty
   const logout = () => {
         sessionStorage.clear()
         setIsLoggedIn(false);
