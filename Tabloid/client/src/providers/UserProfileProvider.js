@@ -6,7 +6,7 @@ export const UserProfileContext = createContext();
 
 export function UserProfileProvider(props) {
 
-  const apiUrl = "https://localhost:44360";
+  const apiUrl = "https://localhost:5001";
 
   const userProfile = sessionStorage.getItem("userProfile");
   const [isLoggedIn, setIsLoggedIn] = useState(userProfile != null);
