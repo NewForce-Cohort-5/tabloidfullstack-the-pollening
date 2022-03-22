@@ -19,9 +19,9 @@ namespace Tabloid.Controllers
 
         // GET: api/<PostController>
         [HttpGet]
-        public List<Post>GetAll()
+        public IActionResult GetAll()
         {
-            return null;
+            return Ok(_postRepository.GetAll());
         }
 
         // GET api/<PostController>/5
