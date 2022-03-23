@@ -1,10 +1,26 @@
 import React, { useState, useEffect, createContext } from "react";
 import { Spinner } from "reactstrap";
 
-export const CategoryProfileContext = createContext();
+export const CategoryContext = createContext();
 
-export function UserProfileProvider(props) {
+export function CategoryProvider(props) {
 
     const apiUrl = "https://localhost:5001";
 
-    const 
+    const [categories, setCategories] = useState([]);
+
+    const getAllCategories = () => {
+        return fetch(`${apiUrl}/api/category`)
+          .then((res) => res.json())
+          .then(setCategories);
+      };
+
+      return (
+        <CategoryContext.Provider value={{
+            getAllCategories
+         }}>
+          {props.children}
+        </CategoryContext.Provider>
+      );
+
+};

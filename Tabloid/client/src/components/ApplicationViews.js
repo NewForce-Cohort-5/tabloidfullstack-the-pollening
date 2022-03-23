@@ -7,7 +7,7 @@ import {
 import Login from "./Login";
 import Register from "./Register";
 import Hello from "./Hello";
-
+import { CategoryProvider } from "../providers/CategoryProvider";
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
 
@@ -22,9 +22,11 @@ export default function ApplicationViews() {
   }
   else{
    return(
+     <CategoryProvider>
       <Routes>
         <Route path="/" element={<Hello />} />
       </Routes>
+      </CategoryProvider>
    );
   }
 }
