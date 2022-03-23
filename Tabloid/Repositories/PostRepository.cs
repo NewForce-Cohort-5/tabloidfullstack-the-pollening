@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using Microsoft.Data.SqlClient;
+using Microsoft.Extensions.Configuration;
 using System.Collections.Generic;
 using Tabloid.Models;
 using Tabloid.Utils;
@@ -18,52 +19,29 @@ namespace Tabloid.Repositories
                 using (var cmd = conn.CreateCommand())
                 {
                     cmd.CommandText = @"
-                SELECT p.Id AS PostId, p.Title, p.Caption, p.DateCreated AS PostDateCreated, 
-                       p.ImageUrl AS PostImageUrl, p.UserProfileId as PostUserProfileId,
-                       up.Name as UserProfileName, up.Bio, up.Email, up.DateCreated AS UserProfileDateCreated, 
-                       up.ImageUrl AS UserProfileImageUrl
-                  FROM Post p 
-                       LEFT JOIN UserProfile up ON p.UserProfileId = up.id
-              ORDER BY p.DateCreated";
+                              
+                       SELECT p.Id, p.Title, p.Content, 
+                              p.ImageLocation AS HeaderImage,
+                              p.CreateDateTime, p.PublishDateTime, p.IsApproved,
+                              p.CategoryId, p.UserProfileId,
+                              c.[Name] AS CategoryName,
+                              u.FirstName, u.LastName, u.DisplayName, 
+                              u.Email, u.CreateDateTime, u.ImageLocation AS AvatarImage,
+                              u.UserTypeId, 
+                              ut.[Name] AS UserTypeName
+                         FROM Post p
+                              LEFT JOIN Category c ON p.CategoryId = c.id
+                              LEFT JOIN UserProfile u ON p.UserProfileId = u.id
+                              LEFT JOIN UserType ut ON u.UserTypeId = ut.id
+                        WHERE IsApproved = 1 AND PublishDateTime < SYSDATETIME()
+                        ORDER BY p.PublishDateTime DESC";
 
                     var reader = cmd.ExecuteReader();
 
                     var posts = new List<Post>();
                     while (reader.Read())
                     {
-                        posts.Add(new Post()
-                        {
-                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
-                            Title = reader.GetString(reader.GetOrdinal("Title")),
-                            Content = reader.GetString(reader.GetOrdinal("Content")),
-                            ImageLocation = DbUtils.GetNullableString(reader, "HeaderImage"),
-                            CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
-                            PublishDateTime = DbUtils.GetNullableDateTime(reader, "PublishDateTime"),
-                            IsApproved = reader.GetBoolean(reader.GetOrdinal("IsApproved")),
-                            CategoryId = reader.GetInt32(reader.GetOrdinal("CategoryId")),
-                            Category = new Category()
-                            {
-                                Id = reader.GetInt32(reader.GetOrdinal("CategoryId")),
-                                Name = reader.GetString(reader.GetOrdinal("CategoryName"))
-                            },
-                            UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
-                            UserProfile = new UserProfile()
-                            {
-                                Id = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
-                                FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
-                                LastName = reader.GetString(reader.GetOrdinal("LastName")),
-                                DisplayName = reader.GetString(reader.GetOrdinal("DisplayName")),
-                                Email = reader.GetString(reader.GetOrdinal("Email")),
-                                CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
-                                ImageLocation = DbUtils.GetNullableString(reader, "AvatarImage"),
-                                UserTypeId = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
-                                UserType = new UserType()
-                                {
-                                    Id = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
-                                    Name = reader.GetString(reader.GetOrdinal("UserTypeName"))
-                                }
-                            }
-                        });
+                        posts.Add(NewPostFromReader(reader));
                     }
 
                     reader.Close();
@@ -100,6 +78,43 @@ namespace Tabloid.Repositories
                     post.Id = (int)cmd.ExecuteScalar();
                 }
             }
+        }
+
+        private Post NewPostFromReader(SqlDataReader reader)
+        {
+            return new Post()
+            {
+                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                Title = reader.GetString(reader.GetOrdinal("Title")),
+                Content = reader.GetString(reader.GetOrdinal("Content")),
+                ImageLocation = DbUtils.GetNullableString(reader, "HeaderImage"),
+                CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
+                PublishDateTime = (System.DateTime)DbUtils.GetNullableDateTime(reader, "PublishDateTime"),
+                CategoryId = reader.GetInt32(reader.GetOrdinal("CategoryId")),
+                IsApproved = reader.GetBoolean(reader.GetOrdinal("IsApproved")),
+                Category = new Category()
+                {
+                    Id = reader.GetInt32(reader.GetOrdinal("CategoryId")),
+                    Name = reader.GetString(reader.GetOrdinal("CategoryName"))
+                },
+                UserProfileId = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
+                UserProfile = new UserProfile()
+                {
+                    Id = reader.GetInt32(reader.GetOrdinal("UserProfileId")),
+                    FirstName = reader.GetString(reader.GetOrdinal("FirstName")),
+                    LastName = reader.GetString(reader.GetOrdinal("LastName")),
+                    DisplayName = reader.GetString(reader.GetOrdinal("DisplayName")),
+                    Email = reader.GetString(reader.GetOrdinal("Email")),
+                    CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
+                    ImageLocation = DbUtils.GetNullableString(reader, "AvatarImage"),
+                    UserTypeId = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
+                    UserType = new UserType()
+                    {
+                        Id = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
+                        Name = reader.GetString(reader.GetOrdinal("UserTypeName"))
+                    }
+                }
+            };
         }
 
     }
