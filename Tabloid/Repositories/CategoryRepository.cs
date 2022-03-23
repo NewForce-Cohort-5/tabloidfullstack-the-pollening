@@ -5,7 +5,7 @@ using Tabloid.Utils;
 
 namespace Tabloid.Repositories
 {
-    public class CategoryRepository : BaseRepository
+    public class CategoryRepository : BaseRepository, ICategoryRepository
     {
         public CategoryRepository(IConfiguration configuration) : base(configuration) { }
 
@@ -16,7 +16,7 @@ namespace Tabloid.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"SELECT id, [Name]
+                    cmd.CommandText = @"SELECT Id, [Name]
                     FROM Category
                     ORDER by [Name]";
 
@@ -24,14 +24,24 @@ namespace Tabloid.Repositories
 
                     var categories = new List<Category>();
                     while (reader.Read())
-                    {                        categories.Add(new Category
+                    {
+                        categories.Add(new Category()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            Name = DbUtils.GetString(reader, "Name")
+                        });
+                    }
+
+                    reader.Close();
+                    return categories;
                 }
             }
         }
 
 
+
+
+
+
     }
-
-
-
 }
