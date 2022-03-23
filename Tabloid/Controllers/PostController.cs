@@ -19,7 +19,7 @@ namespace Tabloid.Controllers
 
         // GET: api/<PostController>
         [HttpGet]
-        public IActionResult GetAll()
+        public IActionResult Get()
         {
             return Ok(_postRepository.GetAll());
         }

@@ -20,13 +20,13 @@ namespace Tabloid.Repositories
                 {
                     cmd.CommandText = @"
                               
-                       SELECT p.Id, p.Title, p.Content, 
-                              p.ImageLocation AS HeaderImage,
+                       SELECT p.Id AS PostId, p.Title, p.Content, 
+                              p.ImageLocation AS PostImage,
                               p.CreateDateTime, p.PublishDateTime, p.IsApproved,
                               p.CategoryId, p.UserProfileId,
                               c.[Name] AS CategoryName,
                               u.FirstName, u.LastName, u.DisplayName, 
-                              u.Email, u.CreateDateTime, u.ImageLocation AS AvatarImage,
+                              u.Email, u.CreateDateTime, u.ImageLocation AS UserProfileImage,
                               u.UserTypeId, 
                               ut.[Name] AS UserTypeName
                          FROM Post p
@@ -64,7 +64,7 @@ namespace Tabloid.Repositories
                             IsApproved, CategoryId, UserProfileId )
                         OUTPUT INSERTED.ID
                         VALUES (
-                            @Title, @Content, @ImageLocation, @CreateDateTime, @PublishDateTime,
+                             @Title, @Content, @ImageLocation, @CreateDateTime, @PublishDateTime,
                             @IsApproved, @CategoryId, @UserProfileId )";
                     cmd.Parameters.AddWithValue("@Title", post.Title);
                     cmd.Parameters.AddWithValue("@Content", post.Content);
@@ -84,10 +84,10 @@ namespace Tabloid.Repositories
         {
             return new Post()
             {
-                Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                Id = reader.GetInt32(reader.GetOrdinal("PostId")),
                 Title = reader.GetString(reader.GetOrdinal("Title")),
                 Content = reader.GetString(reader.GetOrdinal("Content")),
-                ImageLocation = DbUtils.GetNullableString(reader, "HeaderImage"),
+                ImageLocation = DbUtils.GetNullableString(reader, "PostImage"),
                 CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
                 PublishDateTime = (System.DateTime)DbUtils.GetNullableDateTime(reader, "PublishDateTime"),
                 CategoryId = reader.GetInt32(reader.GetOrdinal("CategoryId")),
@@ -106,7 +106,7 @@ namespace Tabloid.Repositories
                     DisplayName = reader.GetString(reader.GetOrdinal("DisplayName")),
                     Email = reader.GetString(reader.GetOrdinal("Email")),
                     CreateDateTime = reader.GetDateTime(reader.GetOrdinal("CreateDateTime")),
-                    ImageLocation = DbUtils.GetNullableString(reader, "AvatarImage"),
+                    ImageLocation = DbUtils.GetNullableString(reader, "UserProfileImage"),
                     UserTypeId = reader.GetInt32(reader.GetOrdinal("UserTypeId")),
                     UserType = new UserType()
                     {

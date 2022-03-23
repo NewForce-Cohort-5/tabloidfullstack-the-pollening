@@ -7,6 +7,8 @@ import {
 import Login from "./Login";
 import Register from "./Register";
 import Hello from "./Hello";
+import { PostList } from "./Post/PostList";
+import { PostContext, PostProvider } from "../providers/PostProvider";
 
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
@@ -22,9 +24,12 @@ export default function ApplicationViews() {
   }
   else{
    return(
+      <PostProvider>
       <Routes>
         <Route path="/" element={<Hello />} />
+        <Route path="/posts" element={<PostList />} />
       </Routes>
+      </PostProvider>
    );
   }
 }
