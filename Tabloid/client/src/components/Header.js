@@ -33,8 +33,9 @@ export default function Header() {
           <Nav className="mr-auto" navbar>
           {isLoggedIn &&
               <NavItem>
-                <NavLink tag={RRNavLink} to="/category">Category</NavLink>
+                <NavLink tag={RRNavLink} to="/category">Category Management</NavLink>
               </NavItem>
+              // expand option ?
             }
           </Nav>
           <Nav navbar>
