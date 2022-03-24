@@ -1,6 +1,7 @@
 import React from "react";
 import { Accordion, Badge, Button } from "react-bootstrap";
 import { Row, Col } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 
 export const Post = ({post}) => {
@@ -18,7 +19,9 @@ export const Post = ({post}) => {
                 {post.category.name}
                 </Col>
                 <Col>
-                <Button className="mt-2" variant="secondary" disabled>Read Me!</Button>
+                <Link to={`/posts/${post.id}`}>
+                    <Button className="mt-2" variant="secondary">Read Me!</Button>
+                </Link>
                 </Col> 
             </Row>  
         </Accordion.Body>
