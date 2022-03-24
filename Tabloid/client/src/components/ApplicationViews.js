@@ -9,6 +9,8 @@ import Register from "./Register";
 import Hello from "./Hello";
 import { CategoryProvider } from "../providers/CategoryProvider";
 import {CategoryList} from "./categories/CategoryList";
+import { PostList } from "./Post/PostList";
+import { PostContext, PostProvider } from "../providers/PostProvider";
 import { TagList } from "./Tag/TagList"
 import { TagProvider } from "../providers/TagProvider";
 
@@ -29,11 +31,14 @@ export default function ApplicationViews() {
    return(
      <CategoryProvider>
      <TagProvider>
+     <PostProvider>
       <Routes>
         <Route path="/" element={<Hello />} />
+        <Route path="/posts" element={<PostList />} />
         <Route path="/tags" element={<TagList />} />
         <Route path="/category" element={<CategoryList />} />
       </Routes>
+      </PostProvider>
       </TagProvider>
       </CategoryProvider>
    );
