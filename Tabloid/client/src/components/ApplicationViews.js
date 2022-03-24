@@ -9,6 +9,8 @@ import Register from "./Register";
 import Hello from "./Hello";
 import { PostList } from "./Post/PostList";
 import { PostContext, PostProvider } from "../providers/PostProvider";
+import { TagList } from "./Tag/TagList"
+import { TagProvider } from "../providers/TagProvider";
 
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
@@ -19,17 +21,21 @@ export default function ApplicationViews() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="*" element={<Navigate to="/login" />} />
+        
       </Routes>
     );
   }
   else{
    return(
-      <PostProvider>
+     <TagProvider>
+     <PostProvider>
       <Routes>
         <Route path="/" element={<Hello />} />
         <Route path="/posts" element={<PostList />} />
+        <Route path="/tags" element={<TagList />} />
       </Routes>
       </PostProvider>
+      </TagProvider>
    );
   }
 }
