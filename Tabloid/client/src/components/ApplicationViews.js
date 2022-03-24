@@ -7,6 +7,8 @@ import {
 import Login from "./Login";
 import Register from "./Register";
 import Hello from "./Hello";
+import { PostList } from "./Post/PostList";
+import { PostContext, PostProvider } from "../providers/PostProvider";
 import { TagList } from "./Tag/TagList"
 import { TagProvider } from "../providers/TagProvider";
 
@@ -26,10 +28,13 @@ export default function ApplicationViews() {
   else{
    return(
      <TagProvider>
+     <PostProvider>
       <Routes>
         <Route path="/" element={<Hello />} />
+        <Route path="/posts" element={<PostList />} />
         <Route path="/tags" element={<TagList />} />
       </Routes>
+      </PostProvider>
       </TagProvider>
    );
   }
