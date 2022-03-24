@@ -35,10 +35,10 @@ export const PostDetails = () => {
             <Card.Subtitle className="mb-2 text-muted">Written by: {post.userProfile.displayName}</Card.Subtitle>
             <Card.Text style={{textIndent: '2rem'}}>{post.content}</Card.Text>
             <div className="d-grid gap-2">
-                <Button variant="primary" size="md">
+                <Button variant="primary" size="md" disabled>
                     Edit
                 </Button>
-                <Button variant="secondary" size="md">
+                <Button variant="secondary" size="md" disabled>
                     Delete
                 </Button>
             </div>
