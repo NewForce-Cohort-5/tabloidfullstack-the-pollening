@@ -28,7 +28,7 @@ export const PostDetails = () => {
             <Card.Body>
             <Card.Title>{post.title.toUpperCase()}</Card.Title>
             <Card.Subtitle className="mb-2 text-muted">Written by: {post.userProfile.displayName}</Card.Subtitle>
-            <Card.Text>{post.content}</Card.Text>
+            <Card.Text style={{textIndent: '2rem'}}>{post.content}</Card.Text>
             <div className="d-grid gap-2">
                 <Button variant="primary" size="md">
                     Edit
