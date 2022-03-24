@@ -1,9 +1,18 @@
-.categoryList{
+.categoryList {
  padding-left: 2em;   
 }
+
+.category__button{
+    margin-left: 2em;   
+   }
 
 .category__title{
  padding-left: 2em;
  font-weight: bold;
  font-size: larger;   
 }
+
+.categoryList__title{
+    padding-left: 2em;
+    padding-top: 2em;   
+   }
