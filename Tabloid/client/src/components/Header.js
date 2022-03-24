@@ -30,6 +30,14 @@ export default function Header() {
               </NavItem>
             }
           </Nav>
+          <Nav className="mr-auto" navbar>
+          {isLoggedIn &&
+              <NavItem>
+                <NavLink tag={RRNavLink} to="/category">Category Management</NavLink>
+              </NavItem>
+              // expand option ?
+            }
+          </Nav>
           <Nav navbar>
             {isLoggedIn &&
               <>
@@ -45,6 +53,10 @@ export default function Header() {
                   <a aria-current="page" className="nav-link"
                     style={{ cursor: "pointer" }} onClick={logout}>Logout</a>
                 </NavItem>
+                {/* <NavItem>
+                  <a aria-current="page" className="nav-link"
+                    style={{ cursor: "pointer" }} onClick={CategoryList}>Category Management</a>
+                </NavItem> */}
               </>
             }
             
