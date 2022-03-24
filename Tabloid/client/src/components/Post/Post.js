@@ -7,7 +7,8 @@ import { Link } from "react-router-dom";
 export const Post = ({post}) => {
     return (
         <Accordion.Item eventKey={post.id}>
-        <Accordion.Header><Badge bg="secondary">{post.publishDateTime.slice(0,10)}</Badge>{post.title}</Accordion.Header>
+         <Badge bg="secondary">{post.publishDateTime.slice(0,10)}</Badge>
+        <Accordion.Header>{post.title.toUpperCase()}</Accordion.Header>
         <Accordion.Body>
             <Row>
                 <Col>
