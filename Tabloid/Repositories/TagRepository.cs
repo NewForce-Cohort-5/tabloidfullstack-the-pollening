@@ -22,7 +22,8 @@ namespace Tabloid.Repositories
                 {
                     cmd.CommandText = @"
                     SELECT Id, Name
-                    FROM Tag";
+                    FROM Tag
+                    Order by name asc";
 
                     var reader = cmd.ExecuteReader();
 
