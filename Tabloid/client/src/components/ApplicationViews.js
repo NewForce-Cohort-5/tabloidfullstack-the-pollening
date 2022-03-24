@@ -9,6 +9,8 @@ import Register from "./Register";
 import Hello from "./Hello";
 import { CategoryProvider } from "../providers/CategoryProvider";
 import {CategoryList} from "./categories/CategoryList";
+import { TagList } from "./Tag/TagList"
+import { TagProvider } from "../providers/TagProvider";
 
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
@@ -19,16 +21,20 @@ export default function ApplicationViews() {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="*" element={<Navigate to="/login" />} />
+        
       </Routes>
     );
   }
   else{
    return(
      <CategoryProvider>
+     <TagProvider>
       <Routes>
         <Route path="/" element={<Hello />} />
+        <Route path="/tags" element={<TagList />} />
         <Route path="/category" element={<CategoryList />} />
       </Routes>
+      </TagProvider>
       </CategoryProvider>
    );
   }
