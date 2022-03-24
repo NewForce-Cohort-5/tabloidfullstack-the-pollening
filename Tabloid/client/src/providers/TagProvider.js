@@ -6,12 +6,13 @@ export const TagContext = createContext();
 
 export function TagProvider(props) {
 
+    const apiUrl = "https://localhost:5001";
 
   const [tags, setTags] = useState([]);
 
 
     const getAllTags = () => {
-    return  fetch("https://localhost:44360/api/Tag") 
+    return  fetch(`${apiUrl}/api/Tag`) 
      .then((response) => response.json())
      .then(setTags);
 
