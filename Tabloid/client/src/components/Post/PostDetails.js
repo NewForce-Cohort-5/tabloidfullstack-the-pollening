@@ -17,13 +17,18 @@ export const PostDetails = () => {
         return null;
     }
 
+    let month = post.publishDateTime.slice(0,10).split("-")[1]
+    let day = post.publishDateTime.slice(0,10).split("-")[2]
+    let year = post.publishDateTime.slice(0,10).split("-")[0]
+    const formattedDate = `${month}-${day}-${year}`;
+
     return (
     <div className="container">
       <div className="row justify-content-center">
         <div className="col-sm-12 col-lg-6">
        
         <Card style={{ width: '30rem', margin: '3em auto' }}>
-            <Badge bg="secondary">{post.publishDateTime.slice(0,10)}</Badge>
+            <Badge bg="secondary">{formattedDate}</Badge>
             <Card.Img variant="top" src={post.imageLocation} />
             <Card.Body>
             <Card.Title>{post.title.toUpperCase()}</Card.Title>
