@@ -1,3 +1,4 @@
+/* this is for the index styling */
 main {
   margin: 2em;
 }
@@ -17,24 +18,10 @@ p {
     white-space: pre-wrap;
 }
 
-/* Posts, MyPosts, CreatePost, Edit Post css styling */
-.post__title {
-  padding-left: 2em;
-  font-weight: bold;
-  font-size: larger;  
-}
+/* this is for the Post styling */
 
-.post__create {
-  margin: 2em;
-}
+/* this is for the Tag styling */
 
+/* this is for the Category styling */
 
-.postForm__title {
-  margin: 2em;
-  font-weight: bold;
-  font-size: larger;  
-}
-
-.postForm fieldset {
-  padding: 0.5em;
-}
+/* this is for the UserProfile styling */

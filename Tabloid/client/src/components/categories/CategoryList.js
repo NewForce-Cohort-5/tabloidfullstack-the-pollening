@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from "react";
 import { CategoryContext } from "../../providers/CategoryProvider";
 import {ListGroup} from "react-bootstrap";
+import Button from 'react-bootstrap/Button';
 import {Category} from "./Category";
 import "./Category.css";
 
@@ -14,7 +15,9 @@ export const CategoryList = () => {
 
 return (
     <>
-        <p className="category__title"> List of Categories</p>
+        <p className="category__title"> Category Page</p>
+        <Button className="category__button" variant="outline-primary" href="/categories/add">Create Category</Button>
+        <p className="categoryList__title"> List of Categories</p>
             <section className="categoryList">
                 <ListGroup> 
                     {categories.map((singleCategoryInLoop) =>{

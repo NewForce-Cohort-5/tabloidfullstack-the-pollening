@@ -25,6 +25,14 @@ namespace Tabloid.Controllers
             return Ok(_categoryRepository.GetAllCategories());
         }
 
+        //POST api/<CategoryController> this is to add a category
+        [HttpPost]
+        public IActionResult Post(Category category)
+        {
+            _categoryRepository.Add(category);
+            return NoContent();
+        }
+
         //// GET api/<CategoryController>/5
         //[HttpGet("{id}")]
         //public string Get(int id)
@@ -32,11 +40,7 @@ namespace Tabloid.Controllers
         //    return "value";
         //}
 
-        //// POST api/<CategoryController>
-        //[HttpPost]
-        //public void Post([FromBody] string value)
-        //{
-        //}
+        
 
         //// PUT api/<CategoryController>/5
         //[HttpPut("{id}")]
