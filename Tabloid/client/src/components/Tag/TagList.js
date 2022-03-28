@@ -1,12 +1,14 @@
 import React, { useContext, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { TagContext } from "../../providers/TagProvider";
-import { Tag }from "./Tag"
+import { Tag } from "./Tag"
+import { Button } from "reactstrap";
 
 export const TagList = () => {
 
     const { tags, getAllTags } = useContext(TagContext)
 
-    
+    const navigate = useNavigate();
 
     useEffect(() => {
         getAllTags();
@@ -17,13 +19,18 @@ export const TagList = () => {
 
     return (
         <>
-        <h2> Tags: </h2>
+            <h2> Tags: </h2>
 
-        <div className="container">
-        {tags.map((tag) => (
-            <Tag tag={tag} key={tag.id} />
-        ))}
-        </div>
+            <Button outline onClick={() => navigate("/add/tags")}>
+                Create New
+            </Button>
+            {' '}
+
+            <div className="container">
+                {tags.map((tag) => (
+                    <Tag tag={tag} key={tag.id} />
+                ))}
+            </div>
         </>
     );
 };

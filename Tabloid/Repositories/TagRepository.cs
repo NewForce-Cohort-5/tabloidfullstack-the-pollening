@@ -5,6 +5,7 @@ using Tabloid.Utils;
 using Tabloid.Models;
 using System;
 using System.Linq;
+using Microsoft.Data.SqlClient;
 
 namespace Tabloid.Repositories
 {
@@ -49,22 +50,58 @@ namespace Tabloid.Repositories
 
         public void Add(Tag tag)
         {
-            using (var conn = Connection)
+            using (SqlConnection conn = Connection)
             {
                 conn.Open();
-                using (var cmd = conn.CreateCommand())
+                using (SqlCommand cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"INSERT INTO Tag (Id, Name)
+                    cmd.CommandText = @"INSERT INTO Tag (Name)
                                         OUTPUT INSERTED.ID
-                                        VALUES (@Id, @Name)";
-                    DbUtils.AddParameter(cmd, "@Id", tag.Id);
-                    DbUtils.AddParameter(cmd, "@FirstName", tag.Name);
+                                        VALUES ( @Name)";
+                    DbUtils.AddParameter(cmd, "@Name", tag.Name);
 
                     tag.Id = (int)cmd.ExecuteScalar();
+                    
                 }
 
             }
 
+        }
+
+        public Tag GetTagById(int id)
+        {
+            using (SqlConnection conn = Connection)
+            {
+                conn.Open();
+
+                using (SqlCommand cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"
+                        SELECT Id, [Name]
+                        FROM Tag
+                        WHERE Id = @id";
+
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        Tag tag = new Tag()
+                        {
+                            Id = reader.GetInt32(reader.GetOrdinal("Id")),
+                            Name = reader.GetString(reader.GetOrdinal("Name")),
+
+                        };
+
+                        reader.Close();
+                        return tag;
+                    }
+
+                    reader.Close();
+                    return null;
+                }
+            }
         }
     }
 }

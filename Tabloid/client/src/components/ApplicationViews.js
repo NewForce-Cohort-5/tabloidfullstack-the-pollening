@@ -14,6 +14,7 @@ import { PostList } from "./Post/PostList";
 import { PostContext, PostProvider } from "../providers/PostProvider";
 import { PostDetails } from "./Post/PostDetails";
 import { TagList } from "./Tag/TagList"
+import TagForm from "./Tag/TagForm";
 import { TagProvider } from "../providers/TagProvider";
 import { PostForm } from "./Post/PostForm";
 
@@ -41,6 +42,8 @@ export default function ApplicationViews() {
         <Route path="/posts/:id" element={<PostDetails />} />
         <Route path="/posts/create" element={<PostForm />} />
         <Route path="/tags" element={<TagList />} />
+        <Route path="/add/tags" element={<TagForm />} />
+        <Route path="/category" element={<CategoryList />} />
         <Route path="/categories" element={<CategoryList />} />
         <Route path="/categories/add" element={<CategoryForm />} />
       </Routes>
