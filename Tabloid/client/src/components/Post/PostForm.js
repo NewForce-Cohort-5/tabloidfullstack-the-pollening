@@ -2,7 +2,7 @@ import React, { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { CategoryContext } from "../../providers/CategoryProvider";
 import {PostContext} from "../../providers/PostProvider";
-import { Button } from "react-bootstrap";
+import { Button, Form, FormSelect} from "react-bootstrap";
 
 export const PostForm = () => {
     
@@ -41,54 +41,45 @@ export const PostForm = () => {
 
     return (
         <>
-        <div className="container">
-        <h3 className="postForm__title">New Post:</h3>
-        <div className="row justify-content-center">
-        <div className="col-sm-10 col-lg-10">
-        <form className="postForm"> 
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="title">Title:</label>
-                    <input value={post.title} type="text" id="title" onChange={handleControlledInputChange} required autoFocus className="form-control" placeholder="title"/>
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="category">Category:</label>
-                    <select>
-                        {categories.map((category) =>{
-                            return (
-                                <option value={category.Id}>{category.Name}</option>
-                            )
-                        })}
-                    </select>
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="content">Content:</label>
-                    <input value={post.content} type="text" id="content" onChange={handleControlledInputChange} required  className="form-control" placeholder="content"/>
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="imageLocation">Gif Image:</label>
-                    <input value={post.imageLocation} type="text" id="imageLocation" onChange={handleControlledInputChange}   className="form-control" placeholder="imageLocation"/>
-                </div>
-            </fieldset>
-            <fieldset>
-                <div className="form-group">
-                    <label htmlFor="publishDateTime">Publish Date:</label>
-                    <input value={post.publishDateTime} type="text" id="publishDateTime" onChange={handleControlledInputChange}   className="form-control" placeholder="publishDateTime"/>
-                </div>
-            </fieldset>
-            <Button onClick={handleClickSavePost} variant="primary" size="md">
-                    Save Post
-            </Button>
-        </form>
-        </div>
-        </div>
-        </div>
+        <h3 className="postForm__title">New Post Form</h3>
+        <Form className="post__form">
+  <Form.Group className="mb-3" controlId="title">
+    <Form.Label>Title:</Form.Label>
+    <Form.Control value={post.title} onChange={handleControlledInputChange} type="text" required autoFocus placeholder="Enter a title for your post" />
+  </Form.Group>
+
+  <Form.Group className="mb-3" controlId="category">
+    <Form.Label>Category:</Form.Label>
+    <FormSelect required autoFocus onChange={handleControlledInputChange}>
+        <option>Select a category</option>
+        {categories.map((category) => {
+            return (
+                <option value={category.id}>{category.name}</option>
+            )
+        })}
+    </FormSelect>
+  </Form.Group>
+
+  <Form.Group className="mb-3" controlId="content">
+    <Form.Label>Content:</Form.Label>
+    <Form.Control value={post.content} onChange={handleControlledInputChange} type="text" id="content" required autoFocus placeholder="Enter content for your post" as="textarea" aria-label="With textarea" />
+  </Form.Group>
+
+  <Form.Group className="mb-3" controlId="gifImage">
+    <Form.Label>Gif Image:</Form.Label>
+    <Form.Control value={post.imageLocation} onChange={handleControlledInputChange} type="text" id="gifImage" autoFocus placeholder="Enter enter a url to your gif" />
+  </Form.Group>
+
+  <Form.Group className="mb-3" controlId="gifImage">
+    <Form.Label>Publish Date:</Form.Label>
+    <Form.Control value={post.publishDateTime} onChange={handleControlledInputChange} type="date" autoFocus id="publishDateTime" />
+  </Form.Group>
+
+
+  <Button onClick={handleClickSavePost} variant="primary" size="md">
+    Save Post
+  </Button>
+</Form>
         </>
     )
 }
