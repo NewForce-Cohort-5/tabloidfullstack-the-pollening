@@ -16,7 +16,7 @@ const TagForm = () => {
     }, []);
 
 
-    const handldeInputChange = (e) => {
+    const handleControlledInputChange = (e) => {
         const NewTag = { ...tag }
         NewTag[e.target.id] = e.target.value
 
@@ -42,13 +42,13 @@ const TagForm = () => {
             <fieldset>
                 <div className="Form">
                     <label>Tag Name:</label>
-                    <input type="text" id="name" onChange={handldeInputChange} required autoFocus className="form-control" value={tag.name} />
+                    <input type="text" id="name" onChange={handleControlledInputChange} required autoFocus className="form-control" value={tag.name} />
                 </div>
             </fieldset>
 
             <div className="form-group row col-sm-12 mx-auto mb-3">
                 <div className="col-sm-12">
-                    <Button primary type="submit" className="btn btn-primary" onClick={SaveTag}>
+                    <Button  className="btn btn-primary" onClick={SaveTag}>
                         Save Tag
                     </Button>
                     <Button outline onClick={() => navigate("/tags")}>
