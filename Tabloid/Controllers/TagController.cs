@@ -19,5 +19,18 @@ namespace Tabloid.Controllers
         {
             return Ok(_tagRepository.GetAll());
         }
+
+        [HttpGet("{id}")]
+        public string Get(int id)
+        {
+            return "value";
+        }
+
+        [HttpPost]
+        public void Post(Tag tag)
+        {
+            _tagRepository.Add(tag);
+        }
+        
     }
 }
