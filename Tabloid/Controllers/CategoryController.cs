@@ -30,7 +30,7 @@ namespace Tabloid.Controllers
         public IActionResult Post(Category category)
         {
             _categoryRepository.Add(category);
-            return Ok(_categoryRepository.GetAllCategories());
+            return NoContent();
         }
 
         //// GET api/<CategoryController>/5
