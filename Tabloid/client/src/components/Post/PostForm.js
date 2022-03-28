@@ -22,8 +22,8 @@ export const PostForm = () => {
         title:"", 
         content:"",
         category:"",
-        imageLocation: "",
-        publishDateTime: ""    
+        imageLocation:"",
+        publishDateTime: "",
     });
 
     const navigate = useNavigate();
@@ -36,7 +36,8 @@ export const PostForm = () => {
 
     const handleClickSavePost = (e) => {
         e.preventDefault();
-        addPost(post).then(() => navigate('/'));  
+        addPost(post)
+        .then(() => navigate('/posts'));  
     }
 
     return (
@@ -54,7 +55,7 @@ export const PostForm = () => {
         <option>Select a category</option>
         {categories.map((category) => {
             return (
-                <option value={category.id}>{category.name}</option>
+                <option value={category.name}>{category.name}</option>
             )
         })}
     </FormSelect>
@@ -62,21 +63,21 @@ export const PostForm = () => {
 
   <Form.Group className="mb-3" controlId="content">
     <Form.Label>Content:</Form.Label>
-    <Form.Control value={post.content} onChange={handleControlledInputChange} type="text" id="content" required autoFocus placeholder="Enter content for your post" as="textarea" aria-label="With textarea" />
+    <Form.Control value={post.content} onChange={handleControlledInputChange} type="text" required autoFocus placeholder="Enter content for your post" as="textarea" aria-label="With textarea" />
   </Form.Group>
 
-  <Form.Group className="mb-3" controlId="gifImage">
+  <Form.Group className="mb-3" controlId="imageLocation">
     <Form.Label>Gif Image:</Form.Label>
-    <Form.Control value={post.imageLocation} onChange={handleControlledInputChange} type="text" id="gifImage" autoFocus placeholder="Enter enter a url to your gif" />
+    <Form.Control value={post.imageLocation} onChange={handleControlledInputChange} type="text" autoFocus placeholder="Enter enter a url to your gif" />
   </Form.Group>
 
-  <Form.Group className="mb-3" controlId="gifImage">
+  <Form.Group className="mb-3" controlId="publishDateTime">
     <Form.Label>Publish Date:</Form.Label>
-    <Form.Control value={post.publishDateTime} onChange={handleControlledInputChange} type="date" autoFocus id="publishDateTime" />
+    <Form.Control value={post.publishDateTime} onChange={handleControlledInputChange} type="date" autoFocus />
   </Form.Group>
 
 
-  <Button onClick={handleClickSavePost} variant="primary" size="md">
+  <Button onClick={handleClickSavePost} variant="primary" size="md" type="submit">
     Save Post
   </Button>
 </Form>
