@@ -27,10 +27,10 @@ namespace Tabloid.Controllers
 
         //POST api/<CategoryController> this is to add a category
         [HttpPost]
-        public IActionResult Category(Category category)
+        public IActionResult Post(Category category)
         {
             _categoryRepository.Add(category);
-            return CreatedAtAction("Get", new { id = category.Id }, category);
+            return Ok(_categoryRepository.GetAllCategories());
         }
 
         //// GET api/<CategoryController>/5

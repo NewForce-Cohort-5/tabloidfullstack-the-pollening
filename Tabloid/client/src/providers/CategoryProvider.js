@@ -15,7 +15,7 @@ export function CategoryProvider(props) {
           .then(setCategories);
       };
       const addCategory = (category) => {
-        return fetch(`${apiUrl}/api/category`, {
+        return fetch(`${apiUrl}/api/Category`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
