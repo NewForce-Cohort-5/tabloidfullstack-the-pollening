@@ -3,6 +3,7 @@ import { PostContext } from "../../providers/PostProvider";
 import { Accordion, Button } from "react-bootstrap";
 import { Post } from "./Post";
 import "../../index.css";
+import { Link } from "react-router-dom";
 
 export const PostList = () => {
   const { posts, getAllPosts } = useContext(PostContext);
@@ -13,8 +14,9 @@ export const PostList = () => {
 
   return (
     <>
-    <Button className="post__create">Create Post</Button>
-   
+    <Link to={`/posts/create`}>
+      <Button className="post__create">Create Post</Button>
+    </Link>
     <div className="container">
     <h3 className="post__title">List of Posts:</h3>
       <div className="row justify-content-center">

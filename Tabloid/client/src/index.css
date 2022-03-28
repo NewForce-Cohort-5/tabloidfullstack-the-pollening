@@ -27,3 +27,14 @@ p {
 .post__create {
   margin: 2em;
 }
+
+
+.postForm__title {
+  margin: 2em;
+  font-weight: bold;
+  font-size: larger;  
+}
+
+.postForm fieldset {
+  padding: 0.5em;
+}
