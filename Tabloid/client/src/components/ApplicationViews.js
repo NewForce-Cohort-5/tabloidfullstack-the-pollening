@@ -12,6 +12,7 @@ import {CategoryList} from "./categories/CategoryList";
 import { PostList } from "./Post/PostList";
 import { PostContext, PostProvider } from "../providers/PostProvider";
 import { TagList } from "./Tag/TagList"
+import TagForm from "./Tag/TagForm";
 import { TagProvider } from "../providers/TagProvider";
 
 export default function ApplicationViews() {
@@ -36,6 +37,7 @@ export default function ApplicationViews() {
         <Route path="/" element={<Hello />} />
         <Route path="/posts" element={<PostList />} />
         <Route path="/tags" element={<TagList />} />
+        <Route path="/add/tags" element={<TagForm />} />
         <Route path="/category" element={<CategoryList />} />
       </Routes>
       </PostProvider>
