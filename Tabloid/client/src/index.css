@@ -1,3 +1,4 @@
+/* this is for the index styling */
 main {
   margin: 2em;
 }
@@ -16,3 +17,11 @@ p {
 .post p {
     white-space: pre-wrap;
 }
+
+/* this is for the Post styling */
+
+/* this is for the Tag styling */
+
+/* this is for the Category styling */
+
+/* this is for the UserProfile styling */
