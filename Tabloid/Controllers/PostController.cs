@@ -38,8 +38,10 @@ namespace Tabloid.Controllers
 
         // POST api/<PostController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public IActionResult Post(Post post)
         {
+            _postRepository.AddNewPost(post);
+            return CreatedAtAction("Get", new { id = post.Id }, post);
         }
 
         // PUT api/<PostController>/5

@@ -16,3 +16,14 @@ p {
 .post p {
     white-space: pre-wrap;
 }
+
+/* Posts, MyPosts, CreatePost, Edit Post css styling */
+.post__title {
+  padding-left: 2em;
+  font-weight: bold;
+  font-size: larger;  
+}
+
+.post__create {
+  margin: 2em;
+}
