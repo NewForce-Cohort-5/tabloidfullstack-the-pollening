@@ -24,13 +24,17 @@ export const Category = ({CategoryProp}) => {
 
     return (
         
-        <ListGroup.Item id={CategoryProp.id} className="category__flex-container" ><div> {CategoryProp.name}</div>
-        <div> <Button variant="secondary" size="md" onClick={onClickHandler}> 
+        <ListGroup.Item id={CategoryProp.id} className="category__flex-container" >
+            <div> {CategoryProp.name}</div>
+            
+            <div> <Button variant="secondary" size="md" onClick={onClickHandler}> 
                 Delete
              </Button></div>
-             <div> <Button variant="secondary" size="md" onClick={() => navigate(`/categories/edit/${CategoryProp.id}`)}> 
+
+            <div> <Button variant="secondary" size="md" onClick={() => navigate(`/categories/edit/${CategoryProp.id}`)}> 
                 Edit
              </Button></div>
+             
         </ListGroup.Item>
     )
 }

@@ -19,30 +19,31 @@ export const CategoryForm = () => {
     const {categoryId} = useParams();
     const navigate = useNavigate();
 
+    const handleControlledInputChange = (event) => {
+      const newCategory = { ...category }
+      newCategory[event.target.id] = event.target.value
+      setCategory(newCategory)
+  }
 
-    
 
-    const submit = (e) => {
+    const handleSaveCategory = (e) => {
       if (category.name ==="")
       {
       window.alert("Please enter a name")
       } else {
         setIsLoading(true);
         if(categoryId){
-          updateCategory({
-            name: category.name
-          })
+          updateCategory(category)
         .then(() => navigate("/categories"))
       }else{
-         addCategory({
-           name: category.name
-         })
+         addCategory(category)
          .then(() => 
             navigate("/categories"));
           };
         };
       }
       
+      console.log(category.name)
         // Get categories. If categoryId is in the URL, getCategoryById
   useEffect(() => {
     if (categoryId){
@@ -60,14 +61,17 @@ export const CategoryForm = () => {
         <div className="container pt-4">
         <div className="row justify-content-center">
 <Form>
-  <Form.Group className="mb-3" controlId="formBasicEmail">
+  <Form.Group className="mb-3" >
     <Form.Label>Category Name</Form.Label>
-    <Form.Control type="name" placeholder="Enter new category" id="userId"
-                onChange={(e) => setCategory(e.target.value)}/>
+    <Form.Control type="text" placeholder="Enter new category" id="name" value={category.name}
+                onChange={handleControlledInputChange}/>
   </Form.Group>
-  <Button variant="primary" onClick={submit}>
-    Create
-  </Button>
+  <Button variant="primary" disabled={isLoading} onClick={e => {
+    e.preventDefault() 
+    handleSaveCategory()}}>
+    {categoryId ? <>Save Update</> : <>Create</>}
+  </Button>{" "}
+  <Button variant="secondary" onClick={() => navigate("/categories")}>Cancel</Button>
 </Form>
 </div>
   </div>
