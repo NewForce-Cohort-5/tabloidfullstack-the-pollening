@@ -1,26 +1,60 @@
 import React, { useContext, useEffect, useState } from "react";
 import { CategoryContext } from "../../providers/CategoryProvider";
 import { Category } from "./Category";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams  } from "react-router-dom";
 import Form from 'react-bootstrap/Form'
 import Button from 'react-bootstrap/Button'
 
 
 export const CategoryForm = () => {
-    const { addCategory} = useContext(CategoryContext);
-    const [name, setName] = useState("");
+    const { addCategory, getCategoryById, updateCategory} = useContext(CategoryContext);
+    
+    //for edit, hold on to state of task in this view
+    const [category, setCategory] = useState({
+      name:" "
+    })
+  //wait for data before button is active
+    const [isLoading, setIsLoading] = useState(false);
 
+    const {categoryId} = useParams();
     const navigate = useNavigate();
 
+
+    
+
     const submit = (e) => {
-        const category = {
-            name
+      if (category.name ==="")
+      {
+      window.alert("Please enter a name")
+      } else {
+        setIsLoading(true);
+        if(categoryId){
+          updateCategory({
+            name: category.name
+          })
+        .then(() => navigate("/categories"))
+      }else{
+         addCategory({
+           name: category.name
+         })
+         .then(() => 
+            navigate("/categories"));
+          };
         };
-        addCategory(category).then((c) => {
-            
-            navigate("/categories");
-          });
-        };
+      }
+      
+        // Get categories. If categoryId is in the URL, getCategoryById
+  useEffect(() => {
+    if (categoryId){
+      getCategoryById(categoryId)
+      .then(category => {
+        setCategory(category)
+          setIsLoading(false)
+      })
+    } else {
+      setIsLoading(false)
+    }
+}, [])
 
     return (
         <div className="container pt-4">
@@ -29,7 +63,7 @@ export const CategoryForm = () => {
   <Form.Group className="mb-3" controlId="formBasicEmail">
     <Form.Label>Category Name</Form.Label>
     <Form.Control type="name" placeholder="Enter new category" id="userId"
-                onChange={(e) => setName(e.target.value)}/>
+                onChange={(e) => setCategory(e.target.value)}/>
   </Form.Group>
   <Button variant="primary" onClick={submit}>
     Create

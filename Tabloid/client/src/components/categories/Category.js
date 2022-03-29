@@ -28,6 +28,9 @@ export const Category = ({CategoryProp}) => {
         <div> <Button variant="secondary" size="md" onClick={onClickHandler}> 
                 Delete
              </Button></div>
+             <div> <Button variant="secondary" size="md" onClick={() => navigate(`/categories/edit/${CategoryProp.id}`)}> 
+                Edit
+             </Button></div>
         </ListGroup.Item>
     )
 }
