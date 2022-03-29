@@ -16,3 +16,13 @@
     padding-left: 2em;
     padding-top: 2em;   
    }
+
+.category__flex-container{
+    display: flex;
+    flex-direction: row;
+
+}
+.category__flex-container > div {
+    margin: 10px;
+    padding: 20px;
+} 
