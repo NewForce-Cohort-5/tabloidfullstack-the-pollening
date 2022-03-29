@@ -41,7 +41,8 @@ namespace Tabloid.Controllers
         public IActionResult Post(Post post)
         {
             _postRepository.AddNewPost(post);
-            return CreatedAtAction("Get", new { id = post.Id }, post);
+            //return CreatedAtAction("Get", new { id = post.Id }, post);
+            return Ok(_postRepository.GetAll());
         }
 
         // PUT api/<PostController>/5

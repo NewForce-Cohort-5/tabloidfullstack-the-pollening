@@ -21,23 +21,25 @@ export const PostForm = () => {
         userProfileId: currentUserId,
         title:"", 
         content:"",
-        category:"",
         imageLocation:"",
-        publishDateTime: "",
+        categoryId: 0,
+        isApproved: true
     });
 
     const navigate = useNavigate();
 
     const handleControlledInputChange = (e) => {
         const newPost = { ...post }
-        newPost[e.target.id] = e.target.value
+        newPost[e.target.name] = e.target.value
         setPost(newPost)
     }
 
     const handleClickSavePost = (e) => {
         e.preventDefault();
+        console.log(post);
         addPost(post)
         .then(() => navigate('/posts'));  
+        
     }
 
     return (
@@ -46,34 +48,35 @@ export const PostForm = () => {
         <Form className="post__form">
   <Form.Group className="mb-3" controlId="title">
     <Form.Label>Title:</Form.Label>
-    <Form.Control value={post.title} onChange={handleControlledInputChange} type="text" required autoFocus placeholder="Enter a title for your post" />
+    <Form.Control name="title" value={post.title} onChange={handleControlledInputChange} type="text" required autoFocus placeholder="Enter a title for your post" />
   </Form.Group>
 
-  <Form.Group className="mb-3" controlId="category">
+  <Form.Group className="mb-3" controlId="categoryId">
     <Form.Label>Category:</Form.Label>
-    <FormSelect required autoFocus onChange={handleControlledInputChange}>
+    <FormSelect required autoFocus name="categoryId" onChange={handleControlledInputChange}>
         <option>Select a category</option>
         {categories.map((category) => {
             return (
-                <option value={category.name}>{category.name}</option>
+                <option value={category.id}>{category.name}</option>
             )
-        })}
+          })
+        }
     </FormSelect>
   </Form.Group>
 
   <Form.Group className="mb-3" controlId="content">
     <Form.Label>Content:</Form.Label>
-    <Form.Control value={post.content} onChange={handleControlledInputChange} type="text" required autoFocus placeholder="Enter content for your post" as="textarea" aria-label="With textarea" />
+    <Form.Control name="content" value={post.content} onChange={handleControlledInputChange} type="text" required autoFocus placeholder="Enter content for your post" as="textarea" aria-label="With textarea" />
   </Form.Group>
 
   <Form.Group className="mb-3" controlId="imageLocation">
     <Form.Label>Gif Image:</Form.Label>
-    <Form.Control value={post.imageLocation} onChange={handleControlledInputChange} type="text" autoFocus placeholder="Enter enter a url to your gif" />
+    <Form.Control name="imageLocation" value={post.imageLocation} onChange={handleControlledInputChange} type="text" autoFocus placeholder="Enter enter a url to your gif" />
   </Form.Group>
 
   <Form.Group className="mb-3" controlId="publishDateTime">
     <Form.Label>Publish Date:</Form.Label>
-    <Form.Control value={post.publishDateTime} onChange={handleControlledInputChange} type="date" autoFocus />
+    <Form.Control name="publishDateTime" value={post.publishDateTime} onChange={handleControlledInputChange} type="date" autoFocus />
   </Form.Group>
 
 
