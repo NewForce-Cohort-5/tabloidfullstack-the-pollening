@@ -44,7 +44,6 @@ export default function ApplicationViews() {
         <Route path="/posts/create" element={<PostForm />} />
         <Route path="/tags" element={<TagList />} />
         <Route path="/add/tags" element={<TagForm />} />
-        <Route path="/category" element={<CategoryList />} />
         <Route path="/categories" element={<CategoryList />} />
         <Route path="/categories/add" element={<CategoryForm />} />
         <Route path="/userprofiles" element={<UserProfileList />} />
