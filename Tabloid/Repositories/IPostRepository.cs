@@ -7,5 +7,8 @@ namespace Tabloid.Repositories
     {
         public List<Post> GetAll();
         public Post GetById(int id);
+
+        public void Add(Post post);
+        public void AddNewPost(Post post);
     }
 }

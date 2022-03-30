@@ -33,6 +33,15 @@ namespace Tabloid.Controllers
             return NoContent();
         }
 
+        // DELETE api/<CategoryController> this is to delete a category from the database
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _categoryRepository.Delete(id);
+            return NoContent();
+        }
+
         //// GET api/<CategoryController>/5
         //[HttpGet("{id}")]
         //public string Get(int id)
@@ -40,7 +49,7 @@ namespace Tabloid.Controllers
         //    return "value";
         //}
 
-        
+
 
         //// PUT api/<CategoryController>/5
         //[HttpPut("{id}")]
@@ -48,10 +57,5 @@ namespace Tabloid.Controllers
         //{
         //}
 
-        //// DELETE api/<CategoryController>/5
-        //[HttpDelete("{id}")]
-        //public void Delete(int id)
-        //{
-        //}
     }
 }
