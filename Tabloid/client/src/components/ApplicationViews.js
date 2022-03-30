@@ -17,6 +17,7 @@ import { TagList } from "./Tag/TagList"
 import TagForm from "./Tag/TagForm";
 import { TagProvider } from "../providers/TagProvider";
 import { PostForm } from "./Post/PostForm";
+import { UserProfileList } from "./userProfiles/UserProfileList";
 
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);
@@ -46,6 +47,7 @@ export default function ApplicationViews() {
         <Route path="/category" element={<CategoryList />} />
         <Route path="/categories" element={<CategoryList />} />
         <Route path="/categories/add" element={<CategoryForm />} />
+        <Route path="/userprofiles" element={<UserProfileList />} />
       </Routes>
       </PostProvider>
       </TagProvider>
@@ -53,3 +55,5 @@ export default function ApplicationViews() {
    );
   }
 }
+
+//Note: UserProfileProvider access was provided in App.js

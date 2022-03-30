@@ -4,6 +4,7 @@ import React, { useState, useEffect, createContext } from "react";
 export const UserProfileContext = createContext();
 
 export function UserProfileProvider(props) {
+  const [userProfiles, setUserProfiles] = useState([]);
 
   const apiUrl = "https://localhost:5001";
 
@@ -47,12 +48,16 @@ export function UserProfileProvider(props) {
       });
   };
 
-
+  const getAllUserProfiles = () => {
+    return fetch(`${apiUrl}/api/UserProfile`)
+    .then((res) => res.json())
+    .then(setUserProfiles);
+  }
 
 
 
   return (
-    <UserProfileContext.Provider value={{ isLoggedIn, login, logout, register,  }}>
+    <UserProfileContext.Provider value={{ isLoggedIn, login, logout, register, getAllUserProfiles }}>
        {props.children}
     </UserProfileContext.Provider>
   );

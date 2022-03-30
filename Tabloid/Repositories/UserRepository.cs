@@ -7,7 +7,18 @@ namespace Tabloid.Repositories
     public class UserRepository : BaseRepository, IUserRepository
     {
         public UserRepository(IConfiguration configuration) : base(configuration) { }
-
+        
+        public List<UserProfile> GetAll()
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"";
+                }
+            }
+        }    
         public UserProfile GetByEmail(string email)
         {
             using (var conn = Connection)
