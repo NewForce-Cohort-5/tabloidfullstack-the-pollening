@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
+using System.Collections.Generic;
 using Tabloid.Models;
 using Tabloid.Utils;
 
@@ -15,10 +16,44 @@ namespace Tabloid.Repositories
                 conn.Open();
                 using (var cmd = conn.CreateCommand())
                 {
-                    cmd.CommandText = @"";
+                    cmd.CommandText = @"
+                    SELECT up.Id, up.DisplayName, up.FirstName,             up.LastName, up.Email, up.CreateDateTime,           up.ImageLocation, up.UserTypeId, ut.[Name] as UserTypeName 
+
+                    FROM UserProfile up
+                    LEFT JOIN UserType ut on up.UserTypeId = ut.Id
+                    ORDER BY up.DisplayName DESC";
+
+                    var reader = cmd.ExecuteReader();
+
+                    var userprofiles = new List<UserProfile>();
+                    while (reader.Read())
+                    {
+                        userprofiles.Add( new UserProfile()
+                            {
+                                Id = DbUtils.GetInt(reader, "Id"),
+                                //FirebaseUserId = DbUtils.GetString(reader, "FirebaseUserId"),
+                                FirstName = DbUtils.GetString(reader, "FirstName"),
+                                LastName = DbUtils.GetString(reader, "LastName"),
+                                DisplayName = DbUtils.GetString(reader, "DisplayName"),
+                                Email = DbUtils.GetString(reader, "Email"),
+                                CreateDateTime = DbUtils.GetDateTime(reader, "CreateDateTime"),
+                                ImageLocation = DbUtils.GetString(reader, "ImageLocation"),
+                                UserTypeId = DbUtils.GetInt(reader, "UserTypeId"),
+                                UserType = new UserType()
+                                {
+                                    Id = DbUtils.GetInt(reader, "UserTypeId"),
+                                    Name = DbUtils.GetString(reader, "UserTypeName"),
+                                }
+                            });
+                        }
+                    reader.Close();
+
+                    return userprofiles;
+                    }
+
                 }
             }
-        }    
+           
         public UserProfile GetByEmail(string email)
         {
             using (var conn = Connection)
