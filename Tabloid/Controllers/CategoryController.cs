@@ -24,6 +24,28 @@ namespace Tabloid.Controllers
             
             return Ok(_categoryRepository.GetAllCategories());
         }
+        // GET api/<CategoryController>/5 this is to get a specific category for editing
+        [HttpGet("{id}")]
+        public IActionResult Get(int id)
+        {
+            var cagegory = _categoryRepository.GetCategoryById(id);
+            if (cagegory == null)
+            {
+                return NotFound();
+            }
+            return Ok(cagegory);
+        }
+
+        [HttpPut("{id}")]
+        public IActionResult Put(int id, Category category)
+        {
+            if(id != category.Id)
+            {
+                return BadRequest();
+            }
+            _categoryRepository.UpdateCategory(category);
+            return NoContent();
+         }
 
         //POST api/<CategoryController> this is to add a category
         [HttpPost]
@@ -42,12 +64,7 @@ namespace Tabloid.Controllers
             return NoContent();
         }
 
-        //// GET api/<CategoryController>/5
-        //[HttpGet("{id}")]
-        //public string Get(int id)
-        //{
-        //    return "value";
-        //}
+        
 
 
 
