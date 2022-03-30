@@ -1,17 +1,17 @@
 import React, { useContext, useNavigate} from "react";
-import { Card, CardBody} from "reactstrap"
+import { Card, CardBody} from "reactstrap";
 import { TagContext } from "../../providers/TagProvider";
-import { button }
+import { Button } from "reactstrap";
 
  export const Tag = ({ tag }) => {
 
-    const { DeleteTag, GetAllTags } = useContext(TagContext)
+    const { deleteTag, GetAllTags } = useContext(TagContext)
 
-    const handleDelete = (d) => {
+    const handleDelete = () => {
         let confirmD = window.confirm("You are about to delete this tag.. are you sure?")
 
         if(confirmD) {
-            DeleteTag(Tag.id)
+            deleteTag(tag.id)
             .then(GetAllTags);
         
         }

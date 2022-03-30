@@ -35,12 +35,12 @@ export function TagProvider(props) {
 
   }
 
-  const deleteTag = (Tag) => {
-    return fetch (`${apiUrl}/api/Tag?${Tag}`,{
+  const deleteTag = (TagId) => {
+    return fetch (`${apiUrl}/api/Tag/${TagId}`,{
       method: "DELETE"
     })
     .then(getAllTags)
-  }
+  };
 
 
   return (
