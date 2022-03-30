@@ -53,7 +53,7 @@ export default function Header() {
                 </NavItem>
 
                 <NavItem>
-                  <NavLink tag={RRNavLink} to="/userprofiles">User userProfiles</NavLink>
+                  <NavLink tag={RRNavLink} to="/userprofiles">User Profiles</NavLink>
                 </NavItem>
                 
                 <NavItem>

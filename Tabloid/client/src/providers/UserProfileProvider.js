@@ -1,7 +1,7 @@
 import React, { useState, useEffect, createContext } from "react";
 
 
-export const UserProfileContext = createContext();
+export const UserProfileContext = React.createContext();
 
 export function UserProfileProvider(props) {
   const [userProfiles, setUserProfiles] = useState([]);
@@ -57,7 +57,7 @@ export function UserProfileProvider(props) {
 
 
   return (
-    <UserProfileContext.Provider value={{ isLoggedIn, login, logout, register, getAllUserProfiles }}>
+    <UserProfileContext.Provider value={{ isLoggedIn, login, logout, register, getAllUserProfiles, userProfiles }}>
        {props.children}
     </UserProfileContext.Provider>
   );

@@ -17,11 +17,8 @@ import { TagList } from "./Tag/TagList"
 import TagForm from "./Tag/TagForm";
 import { TagProvider } from "../providers/TagProvider";
 import { PostForm } from "./Post/PostForm";
-<<<<<<< HEAD
 import { UserProfileList } from "./userProfiles/UserProfileList";
-=======
 import { MyPostList } from "./Post/MyPostList";
->>>>>>> main
 
 export default function ApplicationViews() {
   const { isLoggedIn } = useContext(UserProfileContext);

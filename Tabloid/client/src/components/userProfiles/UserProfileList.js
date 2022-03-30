@@ -1,7 +1,7 @@
 import React, { useContext, useEffect } from "react";
 import { UserProfileContext } from "../../providers/UserProfileProvider";
 import { Accordion, Button } from "react-bootstrap";
-import { Post } from "./Post";
+import { UserProfile } from "./UserProfile";
 import "../../index.css";
 import { Link } from "react-router-dom";
 
@@ -12,6 +12,7 @@ export const UserProfileList = () => {
     getAllUserProfiles();
   }, []);
 
+  console.log(userProfiles)
   return (
     <>
     
@@ -20,8 +21,8 @@ export const UserProfileList = () => {
       <div className="row justify-content-center">
         <div className="col-sm-10 col-lg-10">
           <Accordion defaultActiveKey="0">
-            {userProfiles.map((p) => (
-              <Post key={p.id} post={p} />
+            {userProfiles.map((u) => (
+              <UserProfile key={u.id} userProfile={u} />
             ))}
           </Accordion>
         </div>

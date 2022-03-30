@@ -21,7 +21,7 @@ namespace Tabloid.Repositories
 
                     FROM UserProfile up
                     LEFT JOIN UserType ut on up.UserTypeId = ut.Id
-                    ORDER BY up.DisplayName DESC";
+                    ORDER BY up.DisplayName";
 
                     var reader = cmd.ExecuteReader();
 
