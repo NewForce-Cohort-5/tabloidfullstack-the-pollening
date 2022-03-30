@@ -16,6 +16,13 @@ namespace Tabloid.Controllers
             //_userProfileRepository = userProfileRepository;
             _userRepository = userRepository;
         }
+        
+        //this is to get all userprofiles
+        [HttpGet]
+        public IActionResult Get()
+        {
+            return Ok(_userRepository.GetAll());
+        }
 
         [HttpGet("GetByEmail")]
         public IActionResult GetByEmail(string email)
@@ -28,6 +35,8 @@ namespace Tabloid.Controllers
             }
             return Ok(user);
         }
+
+
 
         [HttpPost]
         public IActionResult Post(UserProfile userProfile)

@@ -1,0 +1,13 @@
+.userProfile_flexContainer{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.userProfile_firstname{
+    padding-left: 2em;
+}
+
+.userProfile_diplayname, .userProfile_firstname{
+    font-weight: bold;
+}

@@ -17,6 +17,7 @@ import { TagList } from "./Tag/TagList"
 import TagForm from "./Tag/TagForm";
 import { TagProvider } from "../providers/TagProvider";
 import { PostForm } from "./Post/PostForm";
+import { UserProfileList } from "./userProfiles/UserProfileList";
 import { MyPostList } from "./Post/MyPostList";
 
 export default function ApplicationViews() {
@@ -47,7 +48,9 @@ export default function ApplicationViews() {
         <Route path="/add/tags" element={<TagForm />} />
         <Route path="/categories" element={<CategoryList />} />
         <Route path="/categories/add" element={<CategoryForm />} />
-        <Route path="/categories/edit/:categoryId/*" element={<CategoryForm />} />   
+
+        <Route path="/categories/edit/:categoryId/*" element={<CategoryForm />} />
+        <Route path="/userprofiles" element={<UserProfileList />} />
       </Routes>
       </PostProvider>
       </TagProvider>
@@ -55,3 +58,5 @@ export default function ApplicationViews() {
    );
   }
 }
+
+//Note: UserProfileProvider access was provided in App.js
