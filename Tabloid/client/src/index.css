@@ -19,6 +19,23 @@ p {
 }
 
 /* this is for the Post styling */
+.form__select {
+  width: 130px;
+}
+
+.post__form {
+  margin: 2em auto;
+  max-width: 500px;
+  border: 2px solid grey;
+  padding: 2em;
+  border-radius: 5px;
+}
+
+.postForm__title {
+  text-align: center;
+  margin: 1em auto;
+}
+
 
 /* this is for the Tag styling */
 
