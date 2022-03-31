@@ -59,8 +59,10 @@ namespace Tabloid.Controllers
 
         // DELETE api/<PostController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public IActionResult Delete(int id)
         {
+            _postRepository.Delete(id);
+            return NoContent();
         }
     }
 }
