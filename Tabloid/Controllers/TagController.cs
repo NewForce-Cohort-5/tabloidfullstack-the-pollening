@@ -15,7 +15,7 @@ namespace Tabloid.Controllers
         }
 
         [HttpGet]
-        public IActionResult get()
+        public IActionResult Get()
         {
             return Ok(_tagRepository.GetAll());
         }
@@ -31,6 +31,13 @@ namespace Tabloid.Controllers
         {
             _tagRepository.Add(tag);
         }
-        
+
+        [HttpDelete("{id}")]
+        public IActionResult Delete(int id)
+        {
+            _tagRepository.DeleteTag(id);
+            return NoContent();
+        }
+
     }
 }
